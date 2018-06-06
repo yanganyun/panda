@@ -1,6 +1,6 @@
 <template>
   <div class="cms-aside">
-      <div class="logo"><a href="/">Localpanda FED</a></div>
+      <div class="logo"><a href="/">Panda</a></div>
 
       <div class="aside-content">
         <el-menu :default-openeds="activeDown" :default-active="activeTitle" background-color="#333" text-color="#fff" active-text-color="#ffd04b">

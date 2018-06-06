@@ -1,12 +1,16 @@
 <template>
   <div class="cms-page">
-    <cmsAside></cmsAside>
+    <cmsAside :activeTitle="'1-2'"></cmsAside>
 
     <div class="cms-main">
 
-      <h2 class="cms-page-title">CMS管理系统</h2>
+      <h2 class="cms-page-title">开发规范</h2>
 
-      
+      <h3>JS命名规范</h3>
+
+      <h3>CSS命名规范</h3>
+
+      <h3>文件拆分规范</h3>
 
     </div>
   </div>

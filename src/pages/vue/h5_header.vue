@@ -1,12 +1,11 @@
 <template>
   <div class="cms-page">
-    <cmsAside></cmsAside>
+    <cmsAside :activeTitle="'2-1'"></cmsAside>
 
     <div class="cms-main">
 
-      <h2 class="cms-page-title">CMS管理系统</h2>
+      <h2 class="cms-page-title">H5公共头部</h2>
 
-      
 
     </div>
   </div>

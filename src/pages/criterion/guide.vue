@@ -1,12 +1,16 @@
 <template>
   <div class="cms-page">
-    <cmsAside></cmsAside>
+    <cmsAside :activeTitle="'1-1'"></cmsAside>
 
     <div class="cms-main">
 
-      <h2 class="cms-page-title">CMS管理系统</h2>
+      <h2 class="cms-page-title">开发指南</h2>
 
-      
+      <h3>PC端</h3>
+
+      <h3>移动端</h3>
+
+      <h3>CMS</h3>
 
     </div>
   </div>

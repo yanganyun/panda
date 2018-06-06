@@ -1,9 +1,12 @@
 //**  导航配置文件：路由,文件名,页面title  */
 let routers = {
+
   //非导航路由写在这里
   pageList: [
+    //首页
     {'title':'localpanda前端组件库','path':'/'}
   ],
+
   //导航路由写在这里
   navList: [
     {

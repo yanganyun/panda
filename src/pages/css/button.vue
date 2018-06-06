@@ -1,12 +1,11 @@
 <template>
   <div class="cms-page">
-    <cmsAside></cmsAside>
+    <cmsAside :activeTitle="'4-2'"></cmsAside>
 
     <div class="cms-main">
 
-      <h2 class="cms-page-title">CMS管理系统</h2>
+      <h2 class="cms-page-title">按钮</h2>
 
-      
 
     </div>
   </div>
@@ -23,22 +22,7 @@ export default {
   },
   data () {
     return {
-      title : 'Localpanda CMS 管理系统',
-      keywords: 'Localpanda CMS 管理系统',
-      description: 'Localpanda CMS 管理系统'
-    }
-  },
-  head(){
-    return {
-      title: this.title,
-      meta: [{
-        name: "keywords",
-        content: this.keywords
-      },
-      {
-        name: "description",
-        content: this.description
-      }]
+      
     }
   },
   mounted(){
