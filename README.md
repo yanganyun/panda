@@ -1,6 +1,6 @@
-# localpanda-cms
+# panda
 
-> A Vue.js project
+> panda前端框架
 
 ## Build Setup
 

@@ -1,7 +1,7 @@
 {
-  "name": "localpanda-cms",
+  "name": "panda",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "panda前端框架",
   "author": "yanganyun <237364436@qq.com>",
   "private": true,
   "scripts": {
