@@ -7,6 +7,10 @@ import router from './router'
 //引入公共样式
 import './assets/css/base.css'
 
+//字体
+import "./assets/font/iconfont.css";
+import './assets/font/iconfont.js'
+
 //引入UI框架
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -47,6 +51,8 @@ SyntaxHighlighter.all();
 $('.preCode').each(function(index,item){
   var $this = $(this);
   var thisDom = $this.text().replace(/</g, '&lt;');
-  $this.after('<pre class="brush:js;">'+thisDom+'</pre>');
+  var maxH = $this.attr('maxHeight');
+  console.log(maxH);
+  $this.after('<div class="pre_box" style="max-height:'+(maxH?maxH+'px':'auto')+';"><pre class="brush:js;">'+thisDom+'</pre></div>');
   //<pre class="brush:js; html-script:true;">
 });

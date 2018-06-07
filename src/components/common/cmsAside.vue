@@ -10,7 +10,7 @@
             <el-submenu :index="''+(titleIndex+1)" :key="item.title" v-for="(item,titleIndex) in cmsNav">
                 <template slot="title"><i :class="item.icon"></i>{{item.title}}</template>
                 <el-menu-item-group>
-                    <el-menu-item  :key="nav.path" v-for="(nav,navIndex) in item.list" :index="(titleIndex+1)+'-'+(navIndex+1)" @click="jump(nav.path)">{{nav.title}}</el-menu-item>
+                    <el-menu-item :key="nav.path" v-for="(nav,navIndex) in item.list" :index="(titleIndex+1)+'-'+(navIndex+1)" @click="jump(nav.path)">{{nav.title}}</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
 
@@ -76,6 +76,8 @@ export default {
   .cms-aside .el-menu{ border: none;}
   .el-menu-item-group{ padding: 0 0 10px;}
   .cms-aside .el-submenu__title,.cms-aside .el-submenu .el-menu-item{ line-height: 40px; height: 40px;}
+  .cms-aside .is-opened .el-menu .el-menu-item{ color: #ccc!important;}
+  .cms-aside .is-opened .el-menu .is-active{ color: #ffd04b!important;}
   .cms-aside .is-opened .el-submenu__title{
     background-color: #222 !important;
   }

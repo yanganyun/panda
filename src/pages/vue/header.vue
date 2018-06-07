@@ -4,7 +4,7 @@
 
     <div class="cms-main">
 
-      <h2 class="cms-page-title">H5公共头部</h2>
+      <h2 class="cms-page-title">公共头部</h2>
 
 
     </div>

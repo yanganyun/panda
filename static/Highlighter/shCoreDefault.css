@@ -331,9 +331,9 @@
 .syntaxhighlighter table td.gutter .line,
 .syntaxhighlighter table td.code .line{
   padding: 15px 0;
-  background-color: #f5f5f5!important;
+  background-color: #f4f4f4!important;
 }
 .syntaxhighlighter table  td.code .container textarea{
-  background-color: #f5f5f5!important;
+  background-color: #f4f4f4!important;
 }
 .toolbar{ display: none!important;}

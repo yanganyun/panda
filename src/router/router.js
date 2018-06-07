@@ -22,7 +22,10 @@ let routers = {
       title:'VUE',
       icon: 'el-icon-menu',
       list:[
-        {'title':'H5公共头部','path':'/vue/h5_header'}
+        {'title':'公共头部','path':'/vue/header'},
+        {'title':'Checkbox / 复选框','path':'/vue/checkbox'},
+        {'title':'Radio / 单选框','path':'/vue/radio'},
+        
       ]
     },
     {
