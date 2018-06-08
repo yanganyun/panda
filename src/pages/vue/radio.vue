@@ -14,8 +14,8 @@
       export default {
         name: 'demo',
         components: {
-          checkboxGroup,
-          checkbox
+          radioGroup,
+          radio
         }
         ......
       }
@@ -26,125 +26,89 @@
 
       <h3>组件介绍</h3>
       <p><span class="red2">checkbox-group</span>：复选框组，用于挂载当前选中的数据。</p>
-      <script class="preCode" type="text/plain" maxHeight="300">
+      <script class="preCode" type="text/plain" maxHeight="300" brush="html">
       <checkbox-group v-model="checkData"></checkbox-group>
       </script>
       <p><span class="red2">checkbox</span>：用于渲染checkbox结构和数据。<span class="red2">label</span>用于填充和标记内容。<span class="red2">v-model</span>用于设置选中状态</p>
-      <script class="preCode" type="text/plain" maxHeight="300">
+      <script class="preCode" type="text/plain" maxHeight="300" brush="html">
       <checkbox :key="index" v-for="(item,index) in checkboxList" v-model="true" :label="item"></checkbox>
       </script>
-      <p>注意组件内部checkbox.vue引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
+      <p>注意组件内部/panda/vue/radio/index.js引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
       <script class="preCode" type="text/plain" maxHeight="300">
-      <style lang="scss" scoped>
-      @import "./mobile.scss";  //PC
-      @import "./pc.scss";   //Mobile
-      </style>
+      import radioGroup from "./radio-group.vue"
+      import radio from "./radio.vue"
+
+      //样式类型，pc.scss 和 mobile.scss
+      import "./pc.scss";
+
+      export {
+        radioGroup,
+        radio
+      }
       </script>
 
 
 
-      <h3>Demo1</h3>
+      <h3>Demo1<span>radio</span></h3>
       <p>
-        <checkbox  v-model="checkedAll"  @change="checkAll">全选</checkbox>
-        <checkbox-group v-model="checkboxData" class="mt10">
-          <checkbox :key="index" v-for="(item,index) in checkboxList" :label="item"></checkbox>
-        </checkbox-group>
+        <radio v-model="radioValue" v-for="(item,index) in radioList" :key="index" :label="item">{{item}}</radio>
       </p>
-      <p class="mt10">您已选：<span class="red2">{{checkNow}}</span></p>
+      <p class="mt10">您已选：<span class="red2">{{radioValue}}</span></p>
       
       <!-- 代码示例1  -->
       <script class="preCode" type="text/plain" maxHeight="300">
-<checkbox v-model="checkedAll" @change="checkAll">全选</checkbox>
+      <radio v-model="radioValue" v-for="(item,index) in radioList" :key="index" :label="item">{.{item}}</radio>
+      <p class="mt10">您已选：<span class="red2">{.{radioValue}}</span></p>
 
-<checkbox-group v-model="checkboxData" class="mt10">
+      import {radioGroup,radio} from "@/panda/vue/radio/"
 
-  <checkbox :key="index" v-for="(item,index) in checkboxList" :label="item"></checkbox>
-
-</checkbox-group>
-
-<p class="mt10">您已选：<span class="red2">{.{checkNow}}</span></p>
-
-
-//JS部分
-import {checkboxGroup,checkbox} from "@/panda/vue/checkbox/"
-
-export default {
-  name: 'index',
-  components: {
-    checkboxGroup,
-    checkbox
-  },
-  data () {
-    return {
-      checkboxData:['上海', '北京'],  //已选数据
-      checkboxList:['上海', '北京', '广州', '深圳', '杭州'],   //城市列表
-      checkNow: '', //当前选中的内容
-      checkedAll:false, //全选状态
+      export default {
+        name: 'index',
+        components: {
+          radioGroup,
+          radio
+        },
+        data () {
+          return {
+            radioValue:'男',
+            radioList:['男', '女', '人妖']
+          }
+        }
       }
-  },
-  mounted(){
-    this.checkNow = this.checkboxData.join('，');
-  },
-  methods:{
-    checkAll(){
-      this.checkedAll = !this.checkedAll;
-      if(this.checkedAll){
-        this.checkboxData = this.checkboxList.concat();
-      }else{
-        this.checkboxData = [];
-      }
-    }
-  },
-  watch:{
-    checkboxData:function(value){
-      this.checkNow = value.join('，');
-    }
-  }
-}
       </script><!-- 代码示例1  -->
 
       
-      <h3>Demo2</h3>
+      <h3>Demo2<span>radio-group</span></h3>
       <p>
-        <checkbox-group v-model="checkboxData2">
-          <checkbox :key="index" v-for="(item,index) in checkboxList2" :label="item" :disabled="index>2"></checkbox>
-        </checkbox-group>
+        <radio-group v-model="radioValue2">
+          <radio v-for="(item,index) in radioList2" :key="index" :disabled="index>1" :label="item">{{item}}</radio>
+        </radio-group>
       </p>
-      <p>您已选：<span class="red2">{{checkNow2}}</span></p>
+      <p>您已选：<span class="red2">{{radioValue2}}</span></p>
 
 
       <!-- 代码示例2  -->
       <script class="preCode" type="text/plain" maxHeight="300">
-<checkbox-group v-model="checkboxData2">
-  <checkbox :key="index" v-for="(item,index) in checkboxList2" :label="item" :disabled="index>2"></checkbox>
-</checkbox-group>
-<p>您已选：<span class="red2">{.{checkNow2}}</span></p>
-      
-//JS部分
-import {checkboxGroup,checkbox} from "@/panda/vue/checkbox/"
+      <radio-group v-model="radioValue2">
+        <radio v-for="(item,index) in radioList2" :key="index" :disabled="index>1" :label="item">{.{item}}</radio>
+      </radio-group>
+      <p>您已选：<span class="red2">{.{radioValue2}}</span></p>
 
-export default {
-  name: 'index',
-  components: {
-    checkboxGroup,
-    checkbox
-  },
-  data () {
-    return {
-      checkboxData2:[],
-      checkboxList2:['上海', '北京', '广州', '深圳', '杭州'],
-      checkNow2: ''
+      import {radioGroup,radio} from "@/panda/vue/radio/"
+
+      export default {
+        name: 'index',
+        components: {
+          radioGroup,
+          radio
+        },
+        data () {
+          return {
+            radioValue2:'',
+            radioList2:['男', '女', '人妖'],
+          }
+        }
       }
-  },
-  mounted(){
-    
-  },
-  watch:{
-    checkboxData2:function(value){
-      this.checkNow2 = value.join('，');
-    }
-  }
-}
       </script><!-- 代码示例2  -->
       <br>
 
@@ -154,48 +118,29 @@ export default {
 
 <script>
 import cmsAside from '@/components/common/cmsAside.vue';
-import {checkboxGroup,checkbox} from "@/panda/vue/checkbox/"
+import {radioGroup,radio} from "@/panda/vue/radio/"
 
 export default {
   name: 'index',
   components: {
     cmsAside,
-    checkboxGroup,
-    checkbox
+    radioGroup,
+    radio
   },
   data () {
     return {
-      checkboxData:['上海', '北京'],
-      checkboxList:['上海', '北京', '广州', '深圳', '杭州'],
-      checkNow: '',
-      checkedAll:false,
+      radioValue:'男',
+      radioList:['男', '女', '人妖'],
 
-      checkboxData2:[],
-      checkboxList2:['上海', '北京', '广州', '深圳', '杭州'],
-      checkNow2: ''
-      
+      radioValue2:'',
+      radioList2:['男', '女', '人妖'],
     }
   },
   mounted(){
-    this.checkNow = this.checkboxData.join('，');
+    
   },
   methods:{
-    checkAll(){
-      this.checkedAll = !this.checkedAll;
-      if(this.checkedAll){
-        this.checkboxData = this.checkboxList.concat();
-      }else{
-        this.checkboxData = [];
-      }
-    }
-  },
-  watch:{
-    checkboxData:function(value){
-      this.checkNow = value.join('，');
-    },
-    checkboxData2:function(value){
-      this.checkNow2 = value.join('，');
-    }
+    
   }
 }
 

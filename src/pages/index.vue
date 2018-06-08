@@ -71,10 +71,10 @@ panda/
       </script>
       
       <p>3、所有的标题都用h3标签。</p>
-      <p>4、所有的描述文字都用p标签。<span class="red2">标红字体</span>用class="red2"，其它常用样式见base.css文件。</p>
-      <p>5、<span class="red2">代码高亮写法</span>：把要显示的代码写在script标签内，加上class、type就可以了。如果需要设置最大高度，再加上maxHeight="300"，见下图示例。</p>
+      <p>4、所有的描述文字都用p标签。<span class="red2">标红字体</span>用class="red2"，<span class="code2">蓝色背景文字</span>用class="code2"，其它常用样式见base.css文件。</p>
+      <p>5、<span class="red2">代码高亮写法</span>：把要显示的代码写在script标签内，<span class="code2">class、type</span>必须加。如果需要设置最大高度，再加上<span class="code2">maxHeight="300"</span>，设置代码类型<span class="code2">brush="html"</span>。见下图示例。</p>
       <script class="preCode" type="text/plain">
-        &lt;script class="preCode" type="text/plain" maxHeight="300">
+        &lt;script class="preCode" type="text/plain" maxHeight="300" brush="js">
           var test = '欢迎使用panda框架';
           alert(test);
         &lt;/script>

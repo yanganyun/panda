@@ -1,6 +1,4 @@
-
-
-<template scope="scope">
+<template>
 	<!--//加载动画-->
 	<label class="checkbox_label" :class="{isChecked:getChecked,checkbox_disabled:isDisabled}">
     <span class="checkbox_box">
@@ -52,20 +50,13 @@
     },
 		methods: {
       inputChange(e){
-        this.$emit('change', this.label);
-        //单个复选框操作
-        if(!this.isGroup){
-          this.thisValue = !this.thisValue;
-        }
+        this.$emit('input',!this.value);
       }
-      
 		},
-		mounted(){
-
+    watch:{
+      value:function(val){
+        this.thisValue = val;
+      }
     }
 	}
 </script>
-
-<style lang="scss" scoped>
-@import "./pc.scss"; 
-</style>

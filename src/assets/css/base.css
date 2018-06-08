@@ -73,7 +73,7 @@ h4{ font-size: 16px;}
 }
 
 /* 滚动条 */
-div::-webkit-scrollbar { width: 6px;  }
+div::-webkit-scrollbar { width: 6px; height: 6px; }
 div::-webkit-scrollbar-track { background-color: #bbb;  border-radius: 3px; }
 div::-webkit-scrollbar-thumb { border-radius: 3px;  background-color: #666; }
 
@@ -89,11 +89,12 @@ div::-webkit-scrollbar-thumb { border-radius: 3px;  background-color: #666; }
 /* .cms-aside{ float: left; width: 200px; margin-left: -220px;} */
 .cms-page{ padding-left: 220px;}
 .cms-main{ width: 100%; padding: 0 20px 100px; box-sizing: border-box;}
-.cms-main p{ margin-top: 10px;}
+.cms-main p{ margin-top: 10px; line-height: 24px;}
 
 /* 格式模版 */
-h3{font-size: 24px; margin: 40px 0 20px; font-weight: 400;}
-h4{ font-size: 16px; margin: 20px 0 8px; font-weight: 400; color: #444;}
+h3{font-size: 24px; margin: 50px 0 20px; font-weight: 400;}
+h3 span{ font-size: 16px; color: #666; margin-left: 20px;}
+h4{ font-size: 16px; margin: 30px 0 10px; font-weight: 400; color: #444;}
 .dl_list{
   overflow: hidden;
   padding-left: 70px;
@@ -106,3 +107,5 @@ h4{ font-size: 16px; margin: 20px 0 8px; font-weight: 400; color: #444;}
 /* 代码高亮 */
 .pre_box{ overflow-x: hidden; overflow-y: auto; margin-top: 10px; border-bottom: #eee solid 1px;}
 .pre_box .syntaxhighlighter{ margin: 0!important;}
+.code2{ display: inline-block; color: #5e6d82; background-color: #e6effb; padding: 0 5px; margin: 0 4px; border-radius: 3px; line-height: 20px;}
+.pre_box .syntaxhighlighter .red3{ color: rgba(206, 21, 183,1)!important;}

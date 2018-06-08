@@ -1,13 +1,11 @@
-
-
 <template scope="scope">
 	<!--//加载动画-->
-	<label class="checkbox_label" :class="{isChecked:getChecked,checkbox_disabled:isDisabled}">
-    <span class="checkbox_box">
-      <input type="checkbox" @change="inputChange" :checked="getChecked" :disabled="isDisabled" :value="label">
-      <i class="iconfont">&#xe654;</i>
+	<label class="radio_label" :class="{isChecked:getChecked,radio_disabled:isDisabled}">
+    <span class="radio_box">
+      <i></i>
+      <input type="radio" @change="inputChange" :checked="getChecked" :disabled="isDisabled" :value="label">
     </span>
-    <span class="checkbox_content">
+    <span class="radio_content">
       <slot>{{label}}</slot>
     </span>
     
@@ -17,12 +15,12 @@
 
 <script>
 	export default {
-    name: "checkbox",
-    props:[
-      'label',
-      'value',
-      'disabled'
-    ],
+    name: "radio",
+    props:{
+      'label':{},
+      'value':{},
+      disabled: Boolean,
+    },
 		data() {
 			return {
         thisValue:this.value
@@ -30,21 +28,24 @@
     },
     computed:{
       isGroup(){
-        return this.$parent.$options._componentTag?true:false;
+        return this.$parent.$options.name=='radioGroup'?true:false;
       },
       getChecked(){
-        //单个复选框操作
+        //单个操作
         if(!this.isGroup){
-          return this.thisValue?true:false;
-        }
-        //复选组
-        var changeAll = this.$parent.value;
-        for(var i=0;i<changeAll.length;i++){
-          if(changeAll[i] == this.label){
+          if(this.thisValue == this.label){
             return true;
+          }else{
+            return false;
           }
         }
-        return false;
+
+        //group组操作
+        if(this.$parent.value == this.label){
+          return true;
+        }else{
+          return false;
+        }
       },
       isDisabled(){
         return this.disabled?true:false;
@@ -52,20 +53,17 @@
     },
 		methods: {
       inputChange(e){
-        this.$emit('change', this.label);
-        //单个复选框操作
-        if(!this.isGroup){
-          this.thisValue = !this.thisValue;
-        }
+        this.$emit('input', this.label);
       }
-      
 		},
 		mounted(){
-
+      
+    },
+    watch:{
+      value:function(val){
+        this.thisValue = val;
+      }
     }
 	}
 </script>
 
-<style lang="scss" scoped>
-@import "./pc.scss"; 
-</style>

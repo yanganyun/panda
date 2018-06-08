@@ -50,9 +50,9 @@ new Vue({
 SyntaxHighlighter.all();
 $('.preCode').each(function(index,item){
   var $this = $(this);
-  var thisDom = $this.text().replace(/</g, '&lt;');
-  var maxH = $this.attr('maxHeight');
-  console.log(maxH);
-  $this.after('<div class="pre_box" style="max-height:'+(maxH?maxH+'px':'auto')+';"><pre class="brush:js;">'+thisDom+'</pre></div>');
+  var thisDom = $this.text().replace(/</g, '&lt;').replace(/{.{/g,'{{');
+  var maxH = $this.attr('maxHeight'),
+    brush = $this.attr('brush');
+  $this.after('<div class="pre_box" style="max-height:'+(maxH?maxH+'px':'auto')+';"><pre class="brush:'+(brush?brush:'js')+';">'+thisDom+'</pre></div>');
   //<pre class="brush:js; html-script:true;">
 });

@@ -6,6 +6,8 @@
 
       <h2 class="cms-page-title">公共头部</h2>
 
+      <h3>H5公共头部</h3>
+      <p>头部改版中....</p>
 
     </div>
   </div>
@@ -22,22 +24,7 @@ export default {
   },
   data () {
     return {
-      title : 'Localpanda CMS 管理系统',
-      keywords: 'Localpanda CMS 管理系统',
-      description: 'Localpanda CMS 管理系统'
-    }
-  },
-  head(){
-    return {
-      title: this.title,
-      meta: [{
-        name: "keywords",
-        content: this.keywords
-      },
-      {
-        name: "description",
-        content: this.description
-      }]
+      
     }
   },
   mounted(){
