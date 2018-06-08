@@ -17,7 +17,7 @@ button,input,select,textarea,samp {font-family: "Helvetica Neue", "Arial", "Ping
 .clearfix,.wrap{*zoom:1;}
 .clear{clear:both;display:block;height:0;overflow:hidden;visibility:hidden;}
 
-h1,h2{ margin: 30px 0; }
+h1,h2{ margin: 50px 0; }
 h1{ font-size: 40px;}
 h2{ font-size: 32px;}
 h3{ font-size: 24px;}

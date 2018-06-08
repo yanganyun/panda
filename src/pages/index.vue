@@ -5,7 +5,6 @@
     <div class="cms-main">
 
       <h2 class="cms-page-title">Panda 前端框架</h2>
-      <br>
       <h3>前言</h3>
       <p class="red2">建议新入职的前端工程师，能仔细浏览本页面和开发文档。</p>
       <p>此框架主要用于Localpanda前端项目工程，包括：PC、H5、CMS系统。<br>希望各位前端工程师能严格遵守规范，并一起努力维护、优化，将框架更好的传承下去。让开发更便捷，性能更卓越。</p>
