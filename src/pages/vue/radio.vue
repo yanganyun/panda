@@ -9,7 +9,7 @@
       <h3>引入组件</h3>
       <p>組件位置根据不同的平台而定，这里引入的是H5和PC项目的路径。</p>
       <script class="preCode" type="text/plain">
-      import {radioGroup,radio} from "~/components/panda/radio/"
+      import {radioGroup,radio} from "~/plugins/panda/radio/"
 
       export default {
         name: 'demo',
@@ -25,15 +25,18 @@
 
 
       <h3>组件介绍</h3>
-      <p><span class="red2">checkbox-group</span>：复选框组，用于挂载当前选中的数据。</p>
+      
       <script class="preCode" type="text/plain" maxHeight="300" brush="html">
-      <checkbox-group v-model="checkData"></checkbox-group>
+        <radio-group v-model="radioValue2">
+          <radio v-for="(item,index) in radioList2" :key="index" :disabled="index>1" :label="item">{.{item}}</radio>
+        </radio-group>
       </script>
-      <p><span class="red2">checkbox</span>：用于渲染checkbox结构和数据。<span class="red2">label</span>用于填充和标记内容。<span class="red2">v-model</span>用于设置选中状态</p>
+      <p><span class="red2">radio-group</span>：复选框组，用于挂载当前选中的数据。</p>
+      <p><span class="red2">radio</span>：用于渲染checkbox结构和数据。<span class="red2">label</span>用于填充和标记内容。<span class="red2">v-model</span>用于设置选中状态</p>
       <script class="preCode" type="text/plain" maxHeight="300" brush="html">
-      <checkbox :key="index" v-for="(item,index) in checkboxList" v-model="true" :label="item"></checkbox>
+      <radio v-model="radioValue" v-for="(item,index) in radioList" :key="index" :label="item">{.{item}}</radio>
       </script>
-      <p>注意组件内部/panda/vue/radio/index.js引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
+      <p>注意组件内部/plugins/panda/radio/index.js引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
       <script class="preCode" type="text/plain" maxHeight="300">
       import radioGroup from "./radio-group.vue"
       import radio from "./radio.vue"
@@ -60,7 +63,7 @@
       <radio v-model="radioValue" v-for="(item,index) in radioList" :key="index" :label="item">{.{item}}</radio>
       <p class="mt10">您已选：<span class="red2">{.{radioValue}}</span></p>
 
-      import {radioGroup,radio} from "@/panda/vue/radio/"
+      import {radioGroup,radio} from "~/plugins/panda/radio/"
 
       export default {
         name: 'index',
@@ -94,7 +97,7 @@
       </radio-group>
       <p>您已选：<span class="red2">{.{radioValue2}}</span></p>
 
-      import {radioGroup,radio} from "@/panda/vue/radio/"
+      import {radioGroup,radio} from "~/plugins/panda/radio/"
 
       export default {
         name: 'index',

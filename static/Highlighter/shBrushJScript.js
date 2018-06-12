@@ -28,7 +28,7 @@
 						'this throw true try typeof var while with'
 						;
 
-		var es6 = 'import export'
+		var es6 = 'import export from'
 
 		var r = SyntaxHighlighter.regexLib;
 		
