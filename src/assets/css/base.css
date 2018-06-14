@@ -32,6 +32,8 @@ h4{ font-size: 16px;}
 .red{ color:red;}
 .red2{ color: #cb3837;}
 .green{ color: green;}
+.green3{ color: #197119;}
+.zong3{ color: #9e7c1a;}
 
 .border_no{ border:none !important;}
 
@@ -109,3 +111,24 @@ h4{ font-size: 16px; margin: 30px 0 10px; font-weight: 400; color: #444;}
 .pre_box .syntaxhighlighter{ margin: 0!important;}
 .code2{ display: inline-block; color: #5e6d82; background-color: #e6effb; padding: 0 5px; margin: 0 4px; border-radius: 3px; line-height: 20px;}
 .pre_box .syntaxhighlighter .red3{ color: rgba(206, 21, 183,1)!important;}
+
+
+.input{
+  height: 32px;
+  border-radius:16px;
+  border: solid 1px #dde0e0;
+  color: #353a3f;
+  padding: 0 10px;
+}
+.btn{
+  display: inline-block;
+  width: 100px;
+  height: 32px;
+  line-height: 32px;
+  color: #fff;
+  background-color: #409eff;
+  text-align: center;
+  border-radius: 16px;
+  border: #409eff solid 1px;
+  cursor: pointer;
+}

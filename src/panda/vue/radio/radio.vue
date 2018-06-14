@@ -20,6 +20,7 @@
       'label':{},
       'value':{},
       disabled: Boolean,
+      change:{}
     },
 		data() {
 			return {
@@ -54,6 +55,9 @@
 		methods: {
       inputChange(e){
         this.$emit('input', this.label);
+        if(typeof this.change =='function'){
+          this.change(e);
+        }
       }
 		},
 		mounted(){
@@ -67,3 +71,7 @@
 	}
 </script>
 
+<style lang="scss">
+//样式类型，pc.scss 和 mobile.scss
+@import "./pc.scss";
+</style>

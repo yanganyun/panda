@@ -27,34 +27,35 @@
       <h3>组件介绍</h3>
       
       <script class="preCode" type="text/plain" maxHeight="300" brush="html">
-        <checkbox-group v-model="checkboxData" class="mt10">
+        <checkbox-group v-model="checkboxData">
           <checkbox :key="index" v-for="(item,index) in checkboxList" :label="item">{.{item}}</checkbox>
         </checkbox-group>
       </script>
       <p><span class="red2">checkbox-group</span>：复选框组，用于挂载当前选中的数据。</p>
-      <p><span class="red2">checkbox</span>：用于渲染checkbox结构和数据。<span class="red2">label</span>用于填充和标记内容。<span class="red2">v-model</span>用于设置选中状态</p>
+      <p><span class="red2">checkbox</span>：用于渲染checkbox结构和数据。</p>
       <script class="preCode" type="text/plain" maxHeight="300" brush="html">
-      <checkbox :key="index" v-for="(item,index) in checkboxList" v-model="true" :label="item">{.{item}}</checkbox>
+      <checkbox :key="index" v-for="(item,index) in checkboxList" :change="changeFn" v-model="true" :label="item">{.{item}}</checkbox>
       </script>
-      <p>注意组件内部<span class="code2">~/plugins/panda/checkbox/index.js</span>引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
-      <script class="preCode" type="text/plain" maxHeight="300">
-      import checkboxGroup from "./checkbox-group.vue"
-      import checkbox from "./checkbox.vue"
-
-      //样式类型，pc.scss 和 mobile.scss
-      import "./pc.scss";
-
-      export {
-        checkboxGroup,
-        checkbox
+      <p><span class="red2">label</span>：用于填充和标记内容。</p>
+      <p><span class="red2">v-model</span>：用于设置选中状态。</p>
+      <p><span class="red2">change</span>：选中时的回调事件。</p>
+      <script class="preCode" type="text/plain" maxHeight="300" brush="js">
+      export default {
+        methods: {
+          changeFn(e){
+            console.log(e.target.value);  //当前的checkbox值
+            console.log(e.target.checked);  //选中状态
+          }
+        }
       }
       </script>
-
+      
+      <p class="red2"><span>*</span> 注意组件内部<span class="code2">~/plugins/panda/checkbox/checkbox.vue</span>引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
 
 
       <h3>Demo1</h3>
       <p>
-        <checkbox  v-model="checkedAll">全选</checkbox>
+        <checkbox  v-model="checkedAll" :change="changeFn" :label="'全选'">全选</checkbox>
         <checkbox-group v-model="checkboxData" class="mt10">
           <checkbox :key="index" v-for="(item,index) in checkboxList" :label="item">{{item}}</checkbox>
         </checkbox-group>
@@ -63,7 +64,7 @@
       
       <!-- 代码示例1  -->
       <script class="preCode" type="text/plain" maxHeight="300">
-<checkbox v-model="checkedAll">全选</checkbox>
+<checkbox v-model="checkedAll" :change="changeFn" :label="'全选'">全选</checkbox>
 
 <checkbox-group v-model="checkboxData" class="mt10">
 
@@ -88,6 +89,12 @@ export default {
       checkboxData:['上海', '北京'],  //已选数据
       checkboxList:['上海', '北京', '广州', '深圳', '杭州'],   //城市列表
       checkedAll:false, //全选状态
+    }
+  },
+  methods: {
+    changeFn(e){
+      console.log(e.target.value);
+      console.log(e.target.checked);
     }
   },
   watch:{
@@ -162,6 +169,12 @@ export default {
       checkboxData2:[],
       checkboxList2:['上海', '北京', '广州', '深圳', '杭州'],
       
+    }
+  },
+  methods: {
+    changeFn(e){
+      console.log(e.target.value);
+      console.log(e.target.checked);
     }
   },
   watch:{

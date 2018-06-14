@@ -28,7 +28,9 @@
 						'this throw true try typeof var while with'
 						;
 
-		var es6 = 'import export from'
+		var es6 = 'import export from';
+		var green = 'console';
+		var zong = '.log';
 
 		var r = SyntaxHighlighter.regexLib;
 		
@@ -40,6 +42,8 @@
 			{ regex: /\s*#.*/gm,									css: 'preprocessor' },		// preprocessor tags like #region and #endregion
 			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),	css: 'keyword' },			// keywords
 			{ regex: new RegExp(this.getKeywords(es6), 'gm'),	css: 'red3' },			// keywords
+			{ regex: new RegExp(this.getKeywords(green), 'gm'),	css: 'green3' },			// keywords
+			{ regex: new RegExp(this.getKeywords(zong), 'gm'),	css: 'zong3' },			// keywords
 			];
 	
 		this.forHtmlScript(r.scriptScriptTags);

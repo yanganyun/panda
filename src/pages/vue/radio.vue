@@ -32,35 +32,36 @@
         </radio-group>
       </script>
       <p><span class="red2">radio-group</span>：复选框组，用于挂载当前选中的数据。</p>
-      <p><span class="red2">radio</span>：用于渲染checkbox结构和数据。<span class="red2">label</span>用于填充和标记内容。<span class="red2">v-model</span>用于设置选中状态</p>
+      <p><span class="red2">radio</span>：用于渲染checkbox结构和数据。</p>
       <script class="preCode" type="text/plain" maxHeight="300" brush="html">
-      <radio v-model="radioValue" v-for="(item,index) in radioList" :key="index" :label="item">{.{item}}</radio>
+      <radio v-for="(item,index) in radioList" :key="index" v-model="radioValue" :change="changeFn" :label="item">{.{item}}</radio>
       </script>
-      <p>注意组件内部/plugins/panda/radio/index.js引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
-      <script class="preCode" type="text/plain" maxHeight="300">
-      import radioGroup from "./radio-group.vue"
-      import radio from "./radio.vue"
-
-      //样式类型，pc.scss 和 mobile.scss
-      import "./pc.scss";
-
-      export {
-        radioGroup,
-        radio
+      <p><span class="red2">label</span>：用于填充和标记内容。</p>
+      <p><span class="red2">v-model</span>：用于设置选中状态。</p>
+      <p><span class="red2">change</span>：选中时的回调事件。</p>
+      <script class="preCode" type="text/plain" maxHeight="300" brush="js">
+      export default {
+        methods: {
+          changeFn(e){
+            console.log(e.target.value);  //当前的checkbox值
+            console.log(e.target.checked);  //选中状态
+          }
+        }
       }
       </script>
 
+      <p class="red2"><span>*</span> 注意组件内部<span class="code2">~/plugins/panda/radio/radio.vue</span>引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
 
 
       <h3>Demo1<span>radio</span></h3>
       <p>
-        <radio v-model="radioValue" v-for="(item,index) in radioList" :key="index" :label="item">{{item}}</radio>
+        <radio v-model="radioValue" v-for="(item,index) in radioList" :key="index" :change="changeFn" :label="item">{{item}}</radio>
       </p>
       <p class="mt10">您已选：<span class="red2">{{radioValue}}</span></p>
       
       <!-- 代码示例1  -->
       <script class="preCode" type="text/plain" maxHeight="300">
-      <radio v-model="radioValue" v-for="(item,index) in radioList" :key="index" :label="item">{.{item}}</radio>
+      <radio v-model="radioValue" v-for="(item,index) in radioList" :key="index" :change="changeFn" :label="item">{.{item}}</radio>
       <p class="mt10">您已选：<span class="red2">{.{radioValue}}</span></p>
 
       import {radioGroup,radio} from "~/plugins/panda/radio/"
@@ -143,7 +144,10 @@ export default {
     
   },
   methods:{
-    
+    changeFn(e){
+      console.log(e.target.value);  //当前的checkbox值
+      console.log(e.target.checked);  //选中状态
+    }
   }
 }
 

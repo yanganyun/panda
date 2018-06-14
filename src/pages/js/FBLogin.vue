@@ -13,21 +13,38 @@
       </script>
 
       <h3>调用方法</h3>
+
+      <h4>登录</h4>
       
-      <script class="preCode" type="text/plain" maxHeight="300" brush="js">
+      <script class="preCode" type="text/plain" brush="js">
       //登录，登录成功后默认刷新页面
-			new FBLogin();
+      new FBLogin();
 
       //登录加回调
+      new FBLogin({
+        loginCallBack:function(){
+          window.location.href="/";
+        }
+      });
 
+      </script>
+
+      <h4>退出登录</h4>
+      
+      <script class="preCode" type="text/plain" brush="js">
+      
       //退出登录，退出成功后默认刷新页面
       new FBLogin({
         logout:true
       });
 
       //退出加回调
-
-
+      new FBLogin({
+        logout:true,
+        logoutCallBack:function(){
+          window.location.href="/";
+	      }
+      });
 
       </script>
 

@@ -16,11 +16,12 @@
 <script>
 	export default {
     name: "checkbox",
-    props:[
-      'label',
-      'value',
-      'disabled'
-    ],
+    props:{
+      'label':{},
+      'value':{},
+      disabled: Boolean,
+      change:{}
+    },
 		data() {
 			return {
         thisValue:this.value
@@ -51,6 +52,9 @@
 		methods: {
       inputChange(e){
         this.$emit('input',!this.value);
+        if(typeof this.change =='function'){
+          this.change(e);
+        }
       }
 		},
     watch:{
@@ -60,3 +64,7 @@
     }
 	}
 </script>
+<style lang="scss">
+//样式类型，pc.scss 和 mobile.scss
+@import "./pc.scss";
+</style>
