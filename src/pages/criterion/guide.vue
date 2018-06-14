@@ -29,8 +29,6 @@ localpanda/
 │   │
 │   ├── pageComponents/     //页面模版
 │   │
-│   ├── panda/              //panda前端组件目录
-│   │
 │   └── Prompt/             //弹窗相关模版
 │
 │
@@ -56,6 +54,8 @@ localpanda/
 │
 │
 ├── plugins/                //第三方组件放置区域
+│   │
+│   └── panda/              //panda前端组件目录
 │
 │
 ├── static/                 //静态资源目录 
@@ -92,9 +92,7 @@ localpanda-h5/
 │   │
 │   ├── footer/             //公共底部
 │   │
-│   ├── info/               //页面模版
-│   │
-│   └── panda/              //panda前端组件目录
+│   └── info/               //页面模版
 │
 │
 ├── middleware/             //中间件，在页面渲染之前加载的一些东西
@@ -111,6 +109,8 @@ localpanda-h5/
 │
 │
 ├── plugins/                //第三方组件放置区域
+│   │
+│   └── panda/              //panda前端组件目录
 │
 │
 ├── static/                 //静态资源目录 
