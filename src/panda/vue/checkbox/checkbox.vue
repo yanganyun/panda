@@ -29,7 +29,7 @@
     },
     computed:{
       isGroup(){
-        return this.$parent.$options._componentTag?true:false;
+        return this.$parent.$options.name=='checkboxGroup'?true:false;
       },
       getChecked(){
         //单个复选框操作
@@ -66,5 +66,5 @@
 </script>
 <style lang="scss">
 //样式类型，pc.scss 和 mobile.scss
-@import "./pc.scss";
+@import "./mobile.scss";
 </style>
