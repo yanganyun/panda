@@ -25,6 +25,7 @@ let routers = {
         {'title':'公共头部','path':'/vue/header'},
         {'title':'Checkbox / 复选框','path':'/vue/checkbox'},
         {'title':'Radio / 单选框','path':'/vue/radio'},
+        {'title':'calendar / 日历','path':'/vue/calendar'}
         
       ]
     },

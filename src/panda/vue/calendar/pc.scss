@@ -1,0 +1,79 @@
+@charset "UTF-8";
+.calendar_all{
+  .calendar_box{
+    border: #ddd solid 1px;
+    width: 360px;
+    padding: 10px;
+    position: relative;
+    .calendar_header{
+      height: 40px;
+      position: relative;
+      p{
+        text-align: center;
+        margin: 0;
+        line-height: 40px;
+        font-weight: bold;
+        font-size: 16px;
+      }
+      .calendar_prev,.calendar_next{
+        display: inline-block;
+        line-height: 40px;
+        padding: 0 8px;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+      .calendar_prev{
+        left: 0;
+      }
+      .calendar_next{
+        right: 0;
+      }
+    }
+    .calendar_content{
+      .week_box{
+        span{
+          float: left;
+          width: 14.28%;
+          min-height: 32px;
+          line-height: 32px;
+          text-align: center;
+          font-weight: bold;
+          font-size: 14px;
+        }
+      }
+      .day_content{
+        span{
+          float: left;
+          width: 14.28%;
+          min-height: 32px;
+        }
+        .other_month{
+          border: #f60 solid 1px;
+        }
+        .now_month{
+          border: #f60 solid 1px;
+        }
+        .today{
+          border: #f60 solid 1px;
+        }
+        &:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0;}
+      }
+    }
+  }
+  .calendar_min{
+    .calendar_content{
+      .day_content{
+        span{
+          text-align: center;
+          line-height: 32px;
+        }
+        
+      }
+    }
+  }
+  
+}
+
