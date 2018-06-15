@@ -1,3 +1,8 @@
+<style lang="scss">
+//样式类型，pc.scss 和 mobile.scss
+@import "./pc.scss";
+</style>
+
 <template scope="scope">
 	<!--//加载动画-->
 	<label class="radio_label" :class="{isChecked:getChecked,radio_disabled:isDisabled}">
@@ -70,8 +75,3 @@
     }
 	}
 </script>
-
-<style lang="scss">
-//样式类型，pc.scss 和 mobile.scss
-@import "./pc.scss";
-</style>

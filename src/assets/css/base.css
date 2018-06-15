@@ -6,9 +6,12 @@ audio,canvas,video{display:inline;zoom:1}command,datalist,keygen,mark,meter,prog
 .hide{ display:none;}
 .block{ display:block;}
 
+html{ font-size: 50px;}
+
 body{margin:0;background:#fff;font:12px/22px "Helvetica Neue", "Arial", "PingFang SC", "Microsoft Yahei", "SimSun", sans-serif; min-width:1000px;}
 button,input,select,textarea,samp {font-family: "Helvetica Neue", "Arial", "PingFang SC", "Microsoft Yahei", "SimSun", sans-serif;}
 
+div,input,p,textarea,ul,li,dl,dd,dt,section,nav,article,aside,header,footer,address{ box-sizing: border-box;}
 
 .w_1000{ min-width:1000px;}
 .wrap{width:1200px; margin:0 auto;}
@@ -97,6 +100,9 @@ div::-webkit-scrollbar-thumb { border-radius: 3px;  background-color: #666; }
 h3{font-size: 24px; margin: 50px 0 20px; font-weight: 400;}
 h3 span{ font-size: 16px; color: #666; margin-left: 20px;}
 h4{ font-size: 16px; margin: 30px 0 10px; font-weight: 400; color: #444;}
+h4 span{ font-size: 12px; color: #666; margin-left: 10px;}
+.mobile_box,.mobile_box_min{ width: 375px; height: 450px; overflow-y: auto; border: #ddd solid 1px; margin-top: 20px; position: relative;}
+.mobile_box_min{ height: 100px;}
 .dl_list{
   overflow: hidden;
   padding-left: 70px;

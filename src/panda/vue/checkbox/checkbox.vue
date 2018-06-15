@@ -1,3 +1,8 @@
+<style lang="scss">
+//样式类型，pc.scss 和 mobile.scss
+@import "./pc.scss";
+</style>
+
 <template>
 	<!--//加载动画-->
 	<label class="checkbox_label" :class="{isChecked:getChecked,checkbox_disabled:isDisabled}">
@@ -64,7 +69,3 @@
     }
 	}
 </script>
-<style lang="scss">
-//样式类型，pc.scss 和 mobile.scss
-@import "./mobile.scss";
-</style>
