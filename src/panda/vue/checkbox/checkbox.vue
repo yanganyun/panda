@@ -10,7 +10,7 @@
       <input type="checkbox" @change="inputChange" :checked="getChecked" :disabled="isDisabled" :value="label">
       <i class="iconfont">&#xe654;</i>
     </span>
-    <span class="checkbox_content">
+    <span :title="label" class="checkbox_content">
       <slot>{{label}}</slot>
     </span>
     
@@ -43,6 +43,9 @@
         }
         //复选组
         var changeAll = this.$parent.value;
+        if(!changeAll){
+          return false;
+        }
         for(var i=0;i<changeAll.length;i++){
           if(changeAll[i] == this.label){
             return true;
