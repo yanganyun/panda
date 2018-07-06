@@ -15,7 +15,7 @@ let routers = {
       list:[
         {'title':'指南','path':'/criterion/guide'},
         {'title':'规范','path':'/criterion/criterion'},
-        {'title':'流程','path':'/criterion/procedure'}
+        {'title':'流程','path':'/criterion/procedure','type':'doing'}
       ]
     },
     {
@@ -25,7 +25,8 @@ let routers = {
         {'title':'公共头部','path':'/vue/header'},
         {'title':'Checkbox / 复选框','path':'/vue/checkbox'},
         {'title':'Radio / 单选框','path':'/vue/radio'},
-        {'title':'calendar / 日历','path':'/vue/calendar'}
+        {'title':'Calendar / 日历','path':'/vue/calendar','type':'doing'},
+        {'title':'Slider / 滑块','path':'/vue/slider'}
         
       ]
     },
@@ -35,15 +36,15 @@ let routers = {
       list:[
         {'title':'Facebook 登录','path':'/js/FBLogin'},
         {'title':'表单校验','path':'/js/validate'},
-        {'title':'日历 / 时间价格表','path':'/js/calendar'}
+        //{'title':'日历 / 时间价格表','path':'/js/calendar'}
       ]
     },
     {
       title:'CSS',
       icon: 'el-icon-document',
       list:[
-        {'title':'icon/字体','path':'/css/iconFont'},
-        {'title':'按钮','path':'/css/button'}
+        {'title':'icon/字体','path':'/css/iconFont','type':'plan'},
+        {'title':'按钮','path':'/css/button','type':'plan'}
       ]
     }
   ]

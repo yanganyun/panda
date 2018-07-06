@@ -10,7 +10,7 @@
             <el-submenu :index="''+(titleIndex+1)" :key="item.title" v-for="(item,titleIndex) in cmsNav">
                 <template slot="title"><i :class="item.icon"></i>{{item.title}}</template>
                 <el-menu-item-group>
-                    <el-menu-item :key="nav.path" v-for="(nav,navIndex) in item.list" :index="(titleIndex+1)+'-'+(navIndex+1)" @click="jump(nav.path)">{{nav.title}}</el-menu-item>
+                    <el-menu-item :key="nav.path" v-for="(nav,navIndex) in item.list" :index="(titleIndex+1)+'-'+(navIndex+1)" @click="jump(nav.path)">{{nav.title}} <span :class="{doing:nav.type=='doing',plan:nav.type=='plan',finish:!nav.type}" :title="getType(nav.type)"></span></el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
 
@@ -52,6 +52,16 @@ export default {
   methods:{
     jump(href){
       location.href = href ? href : '/';
+    },
+    getType(type){
+      var title = '';
+      if(type=='doing'){
+        return '进行中';
+      }else if(type=='plan'){
+        return '未开始';
+      }else{
+        return '已完成';
+      }
     }
   }
 }
@@ -108,4 +118,24 @@ export default {
 .aside-content::-webkit-scrollbar { width: 6px;  }
 .aside-content::-webkit-scrollbar-track { background-color: #333;  border-radius: 3px; }
 .aside-content::-webkit-scrollbar-thumb { border-radius: 3px;  background-color: #000; }
+
+.aside-content .el-menu .el-menu-item span{
+  
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-left: 5px;
+  opacity: 0.6;
+}
+.aside-content .el-menu .el-menu-item .doing{
+  background-color: #fd8301 !important;
+}
+.aside-content .el-menu .el-menu-item .plan{
+  background-color: #888 !important;
+}
+.aside-content .el-menu .el-menu-item .finish{
+  background-color: #29d02c !important;
+}
 </style>
