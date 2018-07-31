@@ -20,8 +20,8 @@
       }
       </script>
 
-
-      <calendar type="min"></calendar>
+      {{changeDate}}
+      <calendar type="multi2" size="big" showMonth="2"  v-model="changeDate" @change="selectDate"></calendar>
 
 
       <h3>组件介绍</h3>
@@ -53,14 +53,16 @@ export default {
   },
   data () {
     return {
-      
+      changeDate: ['2018-07-26','2018-07-28']
     }
   },
   mounted(){
     
   },
   methods:{
-    
+    selectDate(data){
+      //console.log(data);
+    }
   }
 }
 
