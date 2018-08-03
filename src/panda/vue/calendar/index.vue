@@ -319,7 +319,12 @@
         this.clickStartDate = dateStr;
 
         //设置当前选中状态
-        this.addClass(thisPath,'willActive');
+        if(this.hasClass(thisPath,'active')){
+          this.addClass(thisPath,'willDel');
+        }else{
+          this.addClass(thisPath,'willActive');
+        }
+        
 
         //绑定鼠标移动事件
         document.onmouseover = function(e){
@@ -341,6 +346,8 @@
       setWillActive(startDate,endDate){
         var list = this.$el.querySelectorAll('.day_list');
         this.removeClass(list,'willActive');
+        this.removeClass(list,'willDel');
+        
 
         var hasNoDate = false;
         var listArr = [];
@@ -371,7 +378,7 @@
             thisDate = thisList.getAttribute('date');
             if(thisDate<=endDate && thisDate>=startDate){
               //检测区间是否有未选日期，如果有未选日期则设置为全选，否则设置为反选
-              this.addClass(thisList,'willActive');
+              this.addClass(thisList,'willDel');
             }
           }
         }
@@ -465,13 +472,12 @@
           var setSize = setValue.size;
           setValue.add(thisData);
           if(setSize==setValue.size){
-            setValue.delete(thisData);
+            //setValue.delete(thisData);
           }else{
             changeDate.push(thisData);
           }
         }
-        //转为数组
-        setValue = Array.from(setValue);
+        
 
         //设置反选和选中
         var list = this.$el.querySelectorAll('.day_list');
@@ -479,8 +485,10 @@
         for(var i=0;i<list.length;i++){
           var thisList = list[i],
           className = thisList.className;
-          if(/willActive/.test(className) && /active/.test(className)){
-            this.removeClass(thisList,'willActive');
+          if(/willDel/.test(className) && /active/.test(className)){
+            var dateStr = thisList.getAttribute('date');
+            setValue.delete(dateStr);
+            this.removeClass(thisList,'willDel');
             this.removeClass(thisList,'active');
           }else if(/willActive/.test(className)){
             changeDom.push(thisList);
@@ -490,7 +498,8 @@
 
 
         
-
+        //转为数组
+        setValue = Array.from(setValue);
         //排序
         setValue.sort();
 
