@@ -112,20 +112,27 @@ export default {
   },
   methods:{
     selectDate(data){
-      //清除所有可售字段
-      var $list = data.el.querySelectorAll('.day_list .issale');
-      for(var i=0;i<$list.length;i++){
-        $list[i].remove();
+
+      
+
+      if(data.el.querySelectorAll('.calendar_big').length || data.el.querySelectorAll('.calendar_big_double').length){
+        
+        //清除所有可售字段
+        var $list = data.el.querySelectorAll('.day_list .is_sale');
+        for(var i=0;i<$list.length;i++){
+          $list[i].remove();
+        }
+        
+        //根据选择添加可售字段
+        var $active = data.el.querySelectorAll('.active');
+        for(var i=0;i<$active.length;i++){
+          var tipDom = document.createElement('div');
+          tipDom.className='is_sale';
+          tipDom.innerHTML = '可售';
+          $active[i].appendChild(tipDom);
+        }
       }
       
-      //根据选择添加可售字段
-      var $active = data.el.querySelectorAll('.active');
-      for(var i=0;i<$active.length;i++){
-        var tipDom = document.createElement('div');
-        tipDom.className='issale';
-        tipDom.innerHTML = '可售';
-        $active[i].appendChild(tipDom);
-      }
       
     }
   }
@@ -137,10 +144,5 @@ export default {
   .input{
     outline: none;
   }
-  .issale{
-    position: absolute;
-    left: 20px;
-    top: 40px;
-    font-size: 20px;
-  }
+  
 </style>
