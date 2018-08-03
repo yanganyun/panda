@@ -9,26 +9,41 @@
       <h3>引入组件</h3>
       <p>組件位置根据不同的平台而定，这里引入的是H5和PC项目的路径。</p>
       <p class="red2"><span>*</span> 注意组件内部<span class="code2">~/plugins/panda/calendar/index.vue</span>引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
-      <script class="preCode" type="text/plain">
-      import calendar from "~/plugins/panda/calendar/"
-
-      export default {
-        name: 'demo',
-        components: {
-          calendar
-        }
-        ......
-      }
-      </script>
-
-      
-      
 
 
       <h3>组件介绍</h3>
       
       <script class="preCode" type="text/plain" maxHeight="300" brush="html">
-        <calendar v-model="changeDate" bindDom="js_time" type="multi2" size="big" showDouble="2" maxMonths="6" @change="selectDate"></calendar>
+        <calendar v-model="changeDate" bindDom="js_time" type="multi2" size="big" showDouble="2" maxMonths="6" @change="selectDate" :loading="isLoading"></calendar>
+      </script>
+
+      <script class="preCode" type="text/plain" brush="js">
+import calendar from "~/plugins/panda/calendar/"
+
+export default {
+  name: 'demo',
+  components: {
+    calendar
+  },
+  data () {
+    return {
+      isLoading:true,
+      changeDate: []
+    }
+  },
+  mounted(){
+    var self = this;
+    setTimeout(function(){
+      self.isLoading = false; //关闭loading
+      self.changeDate = ['2018-09-26','2018-09-27','2018-09-28'];  //设置已选日期
+    },3000);
+  },
+  methods:{
+    selectDate(data){
+      console.log(data);   //data，包含当前日历对象，选择的元素和日期
+    }
+  }
+}
       </script>
 
       
@@ -38,6 +53,8 @@
       <p><span class="red2">size</span>：日历的尺寸，可设置为<span class="code2">mini</span>和<span class="code2">big</span>，默认为<span class="code2">mini</span>。</p>
       <p><span class="red2">showDouble</span>：是否为双日历。</p>
       <p><span class="red2">maxMonths</span>：限制日历的最大显示月数。默认不限制。</p>
+      <p><span class="red2">loading</span>：是否显示loading状态。</p>
+      
       <p><span class="red2">@change</span>：选择日期后的回调。</p>
       
       
@@ -53,9 +70,9 @@
       
       <!-- 代码示例1  -->
       <h3>Demo1<span>大日历多选（范围选取和反选）</span></h3>
-      <p class="mb10">当前选中日期：{{changeDate}}</p>
+      <p class="mb10"><b>当前选中日期：</b>{{changeDate}}</p>
       
-      <calendar type="multi2" size="big" showDouble="true" maxMonths="6" v-model="changeDate" @change="selectDate"></calendar>
+      <calendar type="multi2" size="big" showDouble="true" maxMonths="6" v-model="changeDate" @change="selectDate" :loading="isLoading"></calendar>
 
 
       <h3>Demo2<span>小日历单选</span></h3>
@@ -99,8 +116,8 @@ export default {
         {'date':'2018-08-27','sale':true,'stock':6},
         {'date':'2018-08-28','sale':true,'stock':2}
       ],
-
-      changeDate: ['2018-08-26','2018-08-28'],
+      isLoading:true,
+      changeDate: [],
       changeDate2: '2018-09-08',
       changeDate3: '2018-09-08',
       changeDate4: ['2018-08-08'],
@@ -108,7 +125,11 @@ export default {
     }
   },
   mounted(){
-    
+    var self = this;
+    setTimeout(function(){
+      self.isLoading = false;
+      self.changeDate = ['2018-09-26','2018-09-27','2018-09-28'];
+    },3000);
   },
   methods:{
     selectDate(data){
