@@ -93,6 +93,14 @@
         .has_date{
           cursor: pointer;
         }
+        .today{
+          //background-color: rgba(255,102,0,0.2);
+          background-color: rgba(27,188,157,0.1);
+          color: #1bbc9d;
+          .day{
+            //font-weight: bold;
+          }
+        }
         .active{
           background-color: #1bbc9d;
           color: #fff;
@@ -117,9 +125,7 @@
         .now_month{
           border: #f60 solid 1px;
         }
-        .today{
-          border: #f60 solid 1px;
-        }
+        
         &:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0;}
       }
     }
@@ -191,7 +197,7 @@
         .day_list{
           border-right: 1px solid #e3e3e3;
           border-bottom: 1px solid #e3e3e3;
-          font-size: 28rem;
+          font-size: 28px;
           .day{
             width: auto;
             height: auto;

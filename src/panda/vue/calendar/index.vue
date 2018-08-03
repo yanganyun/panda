@@ -26,9 +26,9 @@
             <span>Sat</span>
           </div>
           <div class="day_content">
-            <div class="day_list" :class="{'has_date':item,'cal_disabled':!item||toDateStr([year,month,item])<today&&!oldDate}" :key="index" v-for="(item,index) in nowMonthDay" :date="item?toDateStr([year,month,item]):''" @click="selectDate">
+            <div class="day_list" :class="{'has_date':item,'cal_disabled':!item||item<today&&!oldDate , 'today':(item==today)}" :key="index" v-for="(item,index) in nowMonthDay" :date="item?item:''" @click="selectDate">
               <div class="day_box">
-                <span class="day">{{item}}</span>
+                <span class="day" v-if="item.substring(8,10)">{{parseInt(item.substring(8,10))}}</span>
               </div>
             </div>
           </div>
@@ -50,9 +50,9 @@
             <span>Sat</span>
           </div>
           <div class="day_content">
-            <div class="day_list" :class="{'has_date':item,'cal_disabled':!item||toDateStr([nextYear,nextMonth,item])<today&&!oldDate}" :key="index" v-for="(item,index) in nextMonthDay" :date="item?toDateStr([nextYear,nextMonth,item]):''" @click="selectDate">
+            <div class="day_list" :class="{'has_date':item, 'cal_disabled':!item||item<today&&!oldDate , 'today':(item==today)}" :key="index" v-for="(item,index) in nextMonthDay" :date="item?item:''" @click="selectDate">
               <div class="day_box">
-                <span class="day">{{item}}</span>
+                <span class="day" v-if="item.substring(8,10)">{{parseInt(item.substring(8,10))}}</span>
               </div>
             </div>
           </div>
@@ -212,12 +212,11 @@
         for(var i=0;i<42;i++){
           if(i>=firstDayWeek && dayNum<thisMonthDay){
             dayNum++;
-            dayArr.push(dayNum);
+            dayArr.push(year+'-'+this.leadingZero(month)+'-'+this.leadingZero(dayNum));
           }else{
             dayArr.push('');
           }
         }
-
         return dayArr;
       },
       //选中日期
@@ -232,8 +231,7 @@
           if(tagName && tagName.toUpperCase()!='HTML'){
             var dateStr = thisPath.getAttribute('date');
             if(/day_list/.test(className) && dateStr && !/cal_disabled/.test(className)){
-              //触发回调
-              this.$emit('change',thisPath);
+              
               //记录选种值
               if(/multi/.test(this.type)){
                 
@@ -257,6 +255,9 @@
                   
                   //设置源数据
                   this.$emit('input',newDates);
+
+                  //触发回调
+                  this.$emit('change',{'el':this.$el,'changeDate':dateStr,'changeDom':thisPath});
                 }else{
                   //范围多选
                   this.selectMulti(dateStr,thisPath);
@@ -269,6 +270,8 @@
                 this.removeClass(this.$el.querySelectorAll('.day_list'),'active');
                 this.addClass(thisPath,'active');
                 this.$emit('input',dateStr);
+                //触发回调
+                this.$emit('change',{'el':this.$el,'changeDate':dateStr,'changeDom':thisPath});
 
                 this.$el.style.display = 'none';
                 //this.value = dateStr;
@@ -418,12 +421,15 @@
 
         //初始化数据
         var setValue = new Set(this.value);
+        var changeDate = [];
         for(var i=0;i<selectArr.length;i++){
           var thisData = selectArr[i];
           var setSize = setValue.size;
           setValue.add(thisData);
           if(setSize==setValue.size){
             setValue.delete(thisData);
+          }else{
+            changeDate.push(thisData);
           }
         }
         //转为数组
@@ -431,6 +437,7 @@
 
         //设置反选和选中
         var list = this.$el.querySelectorAll('.day_list');
+        var changeDom = [];
         for(var i=0;i<list.length;i++){
           var thisList = list[i],
           className = thisList.className;
@@ -438,17 +445,24 @@
             this.removeClass(thisList,'willActive');
             this.removeClass(thisList,'active');
           }else if(/willActive/.test(className)){
+            changeDom.push(thisList);
             this.removeClass(thisList,'willActive');
           }
         }
 
+
+        
+
         //排序
         setValue.sort();
 
-        this.setActive(setValue);
+        this.setActive(setValue,changeDate,changeDom);
         this.$emit('input',setValue);
+
+        
+        
       },
-      setActive(dates){
+      setActive(dates,changeDate,changeDom){
         var self = this;
         
         
@@ -480,6 +494,9 @@
               }
             }
           }
+
+          //触发回调
+          self.$emit('change',{'el':self.$el,'changeDate':changeDate,'changeDom':changeDom});
         },0);
 
       }

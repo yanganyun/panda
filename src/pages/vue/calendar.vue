@@ -60,17 +60,17 @@
 
       <h3>Demo2<span>小日历单选</span></h3>
       <p class="mb10">当前选中日期：<input class="input js_time" v-model="changeDate2" type="text"></p>
-      <calendar bindDom="js_time" size="mini" oldDate="true" maxMonths="6" v-model="changeDate2"></calendar>
+      <calendar bindDom="js_time" size="mini" oldDate="true" maxMonths="6" v-model="changeDate2" @change="selectDate"></calendar>
 
       
 
       <h3>Demo3<span>小日历多选（单击选取）</span></h3>
       <p class="mb10">当前选中日期：<input class="input js_time2" v-model="changeDate4" type="text"></p>
-      <calendar bindDom="js_time2" type="multi" size="mini" maxMonths="6" v-model="changeDate4"></calendar>
+      <calendar bindDom="js_time2" type="multi" size="mini" maxMonths="6" v-model="changeDate4" @change="selectDate"></calendar>
 
       <h3>Demo4<span>小日历多选（范围选取）</span></h3>
       <p class="mb10">当前选中日期：<input class="input js_time3" v-model="changeDate5" type="text"></p>
-      <calendar bindDom="js_time3" type="multi2" size="mini" showDouble="true" maxMonths="3" v-model="changeDate5"></calendar>
+      <calendar bindDom="js_time3" type="multi2" size="mini" showDouble="true" maxMonths="3" v-model="changeDate5" @change="selectDate"></calendar>
 
       <br><br><br><br><br><br><br><br><br><br><br>
       
@@ -94,6 +94,12 @@ export default {
   },
   data () {
     return {
+      priceData: [
+        {'date':'2018-08-26','sale':true,'stock':12},
+        {'date':'2018-08-27','sale':true,'stock':6},
+        {'date':'2018-08-28','sale':true,'stock':2}
+      ],
+
       changeDate: ['2018-08-26','2018-08-28'],
       changeDate2: '2018-09-08',
       changeDate3: '2018-09-08',
@@ -106,7 +112,21 @@ export default {
   },
   methods:{
     selectDate(data){
-      //console.log(data);
+      //清除所有可售字段
+      var $list = data.el.querySelectorAll('.day_list .issale');
+      for(var i=0;i<$list.length;i++){
+        $list[i].remove();
+      }
+      
+      //根据选择添加可售字段
+      var $active = data.el.querySelectorAll('.active');
+      for(var i=0;i<$active.length;i++){
+        var tipDom = document.createElement('div');
+        tipDom.className='issale';
+        tipDom.innerHTML = '可售';
+        $active[i].appendChild(tipDom);
+      }
+      
     }
   }
 }
@@ -116,5 +136,11 @@ export default {
 <style lang="scss">
   .input{
     outline: none;
+  }
+  .issale{
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    font-size: 20px;
   }
 </style>
