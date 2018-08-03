@@ -32,6 +32,10 @@
               </div>
             </div>
           </div>
+          <div class="calendar_loading" v-show="loading">
+            <svg viewBox="25 25 50 50" class="circular"><circle cx="50" cy="50" r="20" fill="none" class="path"></circle></svg>
+          </div>
+
         </div>
       </div>
       <div class="calendar_month" v-if="showDouble">
@@ -56,6 +60,10 @@
               </div>
             </div>
           </div>
+          <div class="calendar_loading" v-show="loading">
+            <svg viewBox="25 25 50 50" class="circular"><circle cx="50" cy="50" r="20" fill="none" class="path"></circle></svg>
+          </div>
+
         </div>
       </div>
     </div>
@@ -72,7 +80,8 @@
       'value':{},
       'bindDom':String,
       'maxMonths':String,
-      'oldDate': String
+      'oldDate': String,
+      'loading':Boolean
     },
 		data() {
       var date = new Date(),
@@ -318,6 +327,7 @@
           var dayList = self.getParent(e,'has_date');
           if(dayList){
             var mouseDate = dayList.getAttribute('date');
+            //往前移动，往后移动
             if(mouseDate>dateStr){
               self.setWillActive(dateStr,mouseDate);
             }else{
@@ -331,13 +341,41 @@
       setWillActive(startDate,endDate){
         var list = this.$el.querySelectorAll('.day_list');
         this.removeClass(list,'willActive');
+
+        var hasNoDate = false;
+        var listArr = [];
         for(var i=0;i<list.length;i++){
           var thisList = list[i],
           thisDate = thisList.getAttribute('date');
           if(thisDate<=endDate && thisDate>=startDate){
-            this.addClass(thisList,'willActive');
+            //检测区间是否有未选日期，如果有未选日期则设置为全选，否则设置为反选
+            if(!this.hasClass(thisList,'active')){
+              hasNoDate = true;
+            }
+            listArr.push(thisList);
           }
         }
+        
+        //检测区间是否有未选日期，如果有未选日期则设置为全选，否则设置为反选
+        if(hasNoDate){
+          for(var i=0;i<listArr.length;i++){
+            var thisList = listArr[i],
+            thisDate = thisList.getAttribute('date');
+            if(thisDate<=endDate && thisDate>=startDate){
+              this.addClass(thisList,'willActive');
+            }
+          }
+        }else{
+          for(var i=0;i<listArr.length;i++){
+            var thisList = listArr[i],
+            thisDate = thisList.getAttribute('date');
+            if(thisDate<=endDate && thisDate>=startDate){
+              //检测区间是否有未选日期，如果有未选日期则设置为全选，否则设置为反选
+              this.addClass(thisList,'willActive');
+            }
+          }
+        }
+
       },
       //日期转换把不带0的日期转化为标准格式（2018-8-9转为2018-08-09，2018/8/9转为2018-08-09）
       toDateStr(arr){
@@ -584,7 +622,10 @@
       
     },
     watch:{
-      
+      value:function(val){
+        //初始化设置选中日期
+        this.setActive(val);
+      }
     }
 	}
 </script>

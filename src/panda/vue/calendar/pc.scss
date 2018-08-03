@@ -47,7 +47,7 @@
       
     }
     .calendar_content{
-      
+      position: relative;
       .week_box{
         span{
           float: left;
@@ -106,10 +106,15 @@
           color: #fff;
         }
         .willActive{
-          background-color: rgba(27,188,157,0.6);
+          background-color: rgba(27,188,157,0.5);
           color: #fff;
         }
         .active.willActive{
+          background-color: rgba(255,16,16,0.2);
+          //background-color: rgba(27,188,157,0.2);
+          color: #333;
+        }
+        .active.willActive2{
           background-color: rgba(255,16,16,0.2);
           //background-color: rgba(27,188,157,0.2);
           color: #333;
@@ -127,6 +132,24 @@
         }
         
         &:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0;}
+      }
+    }
+    .calendar_loading{
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      width: 100.2%;
+      height: 100.2%;
+      padding: 40% 46% 50%;
+      box-sizing: border-box;
+      background-color: rgba(255,255,255,0.5);
+      .path{
+        animation: loading-dash 1.5s ease-in-out infinite;
+        stroke-dasharray: 90,150;
+        stroke-dashoffset: 0;
+        stroke-width: 2;
+        stroke: #409eff;
+        stroke-linecap: round;
       }
     }
   }
@@ -175,7 +198,8 @@
        }
        
      }
-   }
+    }
+    
  }
 
  //大双日历
@@ -209,9 +233,11 @@
           }
           .is_sale{
             position: absolute;
-            left: 20px;
+            left: 0;
             top: 40px;
-            font-size: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
           }
         }
       }
