@@ -20,7 +20,7 @@
         ......
       }
       </script>
-
+      <p class="red2"><span>*</span> 注意组件内部<span class="code2">~/plugins/panda/checkbox/checkbox.vue</span>引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
 
 
 
@@ -50,7 +50,7 @@
       }
       </script>
       
-      <p class="red2"><span>*</span> 注意组件内部<span class="code2">~/plugins/panda/checkbox/checkbox.vue</span>引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
+      
 
 
       <h3>Demo1</h3>

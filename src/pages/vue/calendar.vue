@@ -8,6 +8,7 @@
 
       <h3>引入组件</h3>
       <p>組件位置根据不同的平台而定，这里引入的是H5和PC项目的路径。</p>
+      <p class="red2"><span>*</span> 注意组件内部<span class="code2">~/plugins/panda/calendar/index.vue</span>引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
       <script class="preCode" type="text/plain">
       import calendar from "~/plugins/panda/calendar/"
 
@@ -20,13 +21,33 @@
       }
       </script>
 
-
+      
       
 
 
       <h3>组件介绍</h3>
+      
+      <script class="preCode" type="text/plain" maxHeight="300" brush="html">
+        <calendar v-model="changeDate" bindDom="js_time" type="multi2" size="big" showDouble="2" maxMonths="6" @change="selectDate"></calendar>
+      </script>
 
-      <p class="red2"><span>*</span> 注意组件内部<span class="code2">~/plugins/panda/radio/radio.vue</span>引入的样式，如果是PC端引入pc.scss，移动端引入mobile.scss</p>
+      
+      <p><span class="red2">v-model</span>：绑定选中的日期，如果是单选默认值为字符串<span class="code2">"2019-08-12"</span>，多选默认值为数组<span class="code2">["2019-08-12"]</span>。</p>
+      <p><span class="red2">bindDom</span>：绑定的输入框的className，含有这个class的输入框focus的时候就会唤起日历。</p>
+      <p><span class="red2">type</span>：日期选择的方式，默认为单选。<span class="code2">multi1</span>为多选（点击选择），<span class="code2">multi2</span>为多选（范围选择）。</p>
+      <p><span class="red2">size</span>：日历的尺寸，可设置为<span class="code2">mini</span>和<span class="code2">big</span>，默认为<span class="code2">mini</span>。</p>
+      <p><span class="red2">showDouble</span>：是否为双日历。</p>
+      <p><span class="red2">maxMonths</span>：限制日历的最大显示月数。默认不限制。</p>
+      <p><span class="red2">@change</span>：选择日期后的回调。</p>
+      
+      
+      
+      
+
+
+
+
+      
 
 
       
@@ -34,22 +55,22 @@
       <h3>Demo1<span>大日历多选（范围选取和反选）</span></h3>
       <p class="mb10">当前选中日期：{{changeDate}}</p>
       
-      <calendar type="multi2" size="big" showMonth="2" maxMonths="6" v-model="changeDate" @change="selectDate"></calendar>
+      <calendar type="multi2" size="big" showDouble="true" maxMonths="6" v-model="changeDate" @change="selectDate"></calendar>
 
 
       <h3>Demo2<span>小日历单选</span></h3>
       <p class="mb10">当前选中日期：<input class="input js_time" v-model="changeDate2" type="text"></p>
-      <calendar bindDom="js_time" size="min" oldDate="true" maxMonths="6" v-model="changeDate2"></calendar>
+      <calendar bindDom="js_time" size="mini" oldDate="true" maxMonths="6" v-model="changeDate2"></calendar>
 
       
 
       <h3>Demo3<span>小日历多选（单击选取）</span></h3>
       <p class="mb10">当前选中日期：<input class="input js_time2" v-model="changeDate4" type="text"></p>
-      <calendar bindDom="js_time2" type="multi" size="min" oldDate="true" maxMonths="6" v-model="changeDate4"></calendar>
+      <calendar bindDom="js_time2" type="multi" size="mini" maxMonths="6" v-model="changeDate4"></calendar>
 
       <h3>Demo4<span>小日历多选（范围选取）</span></h3>
       <p class="mb10">当前选中日期：<input class="input js_time3" v-model="changeDate5" type="text"></p>
-      <calendar bindDom="js_time3" type="multi2" size="min" oldDate="true" maxMonths="6" v-model="changeDate5"></calendar>
+      <calendar bindDom="js_time3" type="multi2" size="mini" showDouble="true" maxMonths="3" v-model="changeDate5"></calendar>
 
       <br><br><br><br><br><br><br><br><br><br><br>
       

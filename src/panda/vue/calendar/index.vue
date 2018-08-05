@@ -6,8 +6,8 @@
 <template>
 	<div class="calendar_all" :class="{calendar_abs:bindDom}">
     <!-- <input class="input" type="text"> -->
-    <div class="calendar_box" :class="{'calendar_min':size=='min'&&showMonth!=2,'calendar_min_double':size=='min'&&showMonth==2,'calendar_big':size!='min'&&showMonth!=2,'calendar_big_double':size!='min'&&showMonth==2}">
-      <span class="calendar_prev iconfont" @click="setPrevMonth" v-show="showPrev">&#xe615;</span>
+    <div class="calendar_box" :class="{'calendar_mini':size=='mini'&&!showDouble,'calendar_mini_double':size=='mini'&&showDouble,'calendar_big':size!='mini'&&!showDouble,'calendar_big_double':size!='mini'&&showDouble}">
+      <span class="calendar_prev iconfont" @click="setPrevMonth" v-show="showPrev||oldDate">&#xe615;</span>
       <span class="calendar_next iconfont" @click="setNextMonth" v-show="showNext">&#xe620;</span>
 
       <div class="calendar_month">
@@ -26,7 +26,7 @@
             <span>Sat</span>
           </div>
           <div class="day_content">
-            <div class="day_list" :class="{'has_date':item}" :key="index" v-for="(item,index) in nowMonthDay" :date="item?toDateStr([year,month,item]):''" @click="selectDate">
+            <div class="day_list" :class="{'has_date':item,'cal_disabled':!item||toDateStr([year,month,item])<today&&!oldDate}" :key="index" v-for="(item,index) in nowMonthDay" :date="item?toDateStr([year,month,item]):''" @click="selectDate">
               <div class="day_box">
                 <span class="day">{{item}}</span>
               </div>
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <div class="calendar_month" v-if="showMonth==2">
+      <div class="calendar_month" v-if="showDouble">
         <div class="calendar_header">
           <p>{{calendarTitle(nextYear,nextMonth)}}</p>
         </div>
@@ -50,7 +50,7 @@
             <span>Sat</span>
           </div>
           <div class="day_content">
-            <div class="day_list" :class="{'has_date':item}" :key="index" v-for="(item,index) in nextMonthDay" :date="item?toDateStr([nextYear,nextMonth,item]):''" @click="selectDate">
+            <div class="day_list" :class="{'has_date':item,'cal_disabled':!item||toDateStr([nextYear,nextMonth,item])<today&&!oldDate}" :key="index" v-for="(item,index) in nextMonthDay" :date="item?toDateStr([nextYear,nextMonth,item]):''" @click="selectDate">
               <div class="day_box">
                 <span class="day">{{item}}</span>
               </div>
@@ -68,10 +68,11 @@
     props:{
       'type':String,
       'size':String,
-      'showMonth':String,
+      'showDouble':String,
       'value':{},
       'bindDom':String,
-      'maxMonths':String
+      'maxMonths':String,
+      'oldDate': String
     },
 		data() {
       var date = new Date(),
@@ -132,7 +133,7 @@
       },
       setPrevMonth(month){
         //双日历第二个月数据
-        if(this.showMonth == 2){
+        if(this.showDouble){
           this.nextMonthDay = this.getMonthDay(this.year,this.month);
           this.nextYear = this.year;
           this.nextMonth = this.month; 
@@ -155,7 +156,7 @@
         this.showNext = true;
         
 
-        if(Math.abs((this.year-this.nowYear)*12-Math.abs(this.month-this.nowMonth)) <=0){
+        if(Math.abs((this.year-this.nowYear)*12-Math.abs(this.month-this.nowMonth)) <=0 && !this.oldDate){
           this.showPrev = false;
         }
         
@@ -174,7 +175,7 @@
 
 
         //双日历第二个月数据
-        if(this.showMonth == 2){
+        if(this.showDouble){
           var thisY = this.year,
             thisM = this.month;
           thisM++;
@@ -194,7 +195,7 @@
         //设置显示翻页按钮
         this.showPrev = true;
 
-        if( Math.abs((this.year-this.nowYear)*12-Math.abs(this.month-this.nowMonth)) >= this.maxMonths-1-(this.showMonth?1:0)){
+        if( Math.abs((this.year-this.nowYear)*12-Math.abs(this.month-this.nowMonth)) >= this.maxMonths-1-(this.showDouble?1:0)){
           this.showNext = false;
         }
         
@@ -230,7 +231,7 @@
           // 找到日期选择的最外层day_list
           if(tagName && tagName.toUpperCase()!='HTML'){
             var dateStr = thisPath.getAttribute('date');
-            if(/day_list/.test(className) && dateStr){
+            if(/day_list/.test(className) && dateStr && !/cal_disabled/.test(className)){
               //触发回调
               this.$emit('change',thisPath);
               //记录选种值
@@ -486,7 +487,7 @@
 		mounted(){
       //初始化显示日期
       this.nowMonthDay = this.getMonthDay(this.year,this.month);
-      if(this.showMonth == 2){
+      if(this.showDouble){
         this.nextMonthDay = this.getMonthDay(this.nextYear,this.nextMonth);
       }
 
@@ -509,6 +510,12 @@
 
         for(var i=0;i<this.focusDom.length;i++){
           this.focusDom[i].onfocus = function(e){
+            //先赢藏所有弹窗组件
+            var $calendar_abs = document.querySelectorAll('.calendar_abs');
+            for(var i=0;i<$calendar_abs.length;i++){
+              $calendar_abs[i].style.display = 'none';
+            };
+
             var $this = this;
             self.focusInput = $this;
             var $calendar = self.$el;
@@ -556,50 +563,6 @@
             };
           }
         }
-
-
-        /*
-        document.onclick = function(e){
-          var $this = e.target;
-
-          console.log(self.className);
-          
-          //检测点击的元素
-          var hasDomClass = self.hasClass($this,self.className);
-          var $calendar = self.$el;
-          if(hasDomClass){
-            
-            var focusH = $this.offsetHeight,
-              focusL = $this.offsetLeft,
-              focusT = $this.offsetTop;
-            
-            $calendar.style.display = 'block';
-            $calendar.style.left = focusL + 'px';
-            $calendar.style.top = focusT+focusH + 'px';
-          }else{
-            //点击其他区域
-            var path = e.path;
-            var isCalendar = false;
-            for(var i=0;i<path.length;i++){
-              var thisPath = path[i];
-              var pathClassName = thisPath.className;
-              if(/calendar_all/.test(pathClassName)){
-                isCalendar = true;
-                break;
-              }
-            }
-
-            console.log(hasDomClass);
-            console.log(className);
-            //点击其他区域、日历区域隐藏日历
-            if(!isCalendar || !/multi/.test(self.type) && $this.className=='day' || !/multi/.test(self.type) && $this.className=='day_box'){
-              $calendar.style.display = 'none';
-            }
-          }
-          
-        }
-
-        */
       }
       
     },
