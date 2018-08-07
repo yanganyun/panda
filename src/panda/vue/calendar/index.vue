@@ -615,8 +615,8 @@
           //点击其他区域
           var isCalendar = false;
 
-          var thisPath = self.getParents($this,'day_list');
-          if(thisPath && /calendar_all/.test(thisPath.className)){
+          var thisPath = self.getParents($this,'calendar_all');
+          if(thisPath){
             isCalendar = true;
           }
 
