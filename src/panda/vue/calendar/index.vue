@@ -1,7 +1,18 @@
-<style lang="scss">
+<style lang="scss" scoped>
 //样式类型，pc.scss 和 mobile.scss
 @import "./pc.scss";
 </style>
+<style lang="scss">
+.is_sale{
+  position: absolute;
+  left: 0;
+  top: 40px;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+}
+</style>
+
 
 <template>
 	<div class="calendar_all" :class="{calendar_abs:bindDom}">
@@ -231,62 +242,54 @@
       //选中日期
       selectDate(e){
         
-        var path = e.path;
-        for(var i=0;i<path.length;i++){
-          var thisPath = path[i];
-          var className = thisPath.className,
-            tagName = thisPath.tagName;
-          // 找到日期选择的最外层day_list
-          if(tagName && tagName.toUpperCase()!='HTML'){
-            var dateStr = thisPath.getAttribute('date');
-            if(/day_list/.test(className) && dateStr && !/cal_disabled/.test(className)){
+        var thisPath = e.target.parentNode,
+          className = thisPath.className;
+        var dateStr = thisPath.getAttribute('date');
+        if(/day_list/.test(className) && dateStr && !/cal_disabled/.test(className)){
+          
+          //记录选种值
+          if(/multi/.test(this.type)){
+            
+            //单击多选
+            if(this.type=='multi'){
               
-              //记录选种值
-              if(/multi/.test(this.type)){
-                
-                //单击多选
-                if(this.type=='multi'){
-                  
 
-                  //添加选中日期
-                  var datesSet = new Set(this.value);
-                  var thisSize = datesSet.size;
-                  datesSet.add(dateStr);
+              //添加选中日期
+              var datesSet = new Set(this.value);
+              var thisSize = datesSet.size;
+              datesSet.add(dateStr);
 
-                  //添加和删除选中状态、数据
-                  if(datesSet.size==thisSize){
-                    datesSet.delete(dateStr);
-                    this.removeClass(thisPath,'active');
-                  }else{
-                    this.addClass(thisPath,'active');
-                  };
-                  var newDates = Array.from(datesSet);
-                  
-                  //设置源数据
-                  this.$emit('input',newDates);
-
-                  //触发回调
-                  this.$emit('change',{'el':this.$el,'changeDate':dateStr,'changeDom':thisPath});
-                }else{
-                  //范围多选
-                  this.selectMulti(dateStr,thisPath);
-                }
-                
-
-
-
+              //添加和删除选中状态、数据
+              if(datesSet.size==thisSize){
+                datesSet.delete(dateStr);
+                this.removeClass(thisPath,'active');
               }else{
-                this.removeClass(this.$el.querySelectorAll('.day_list'),'active');
                 this.addClass(thisPath,'active');
-                this.$emit('input',dateStr);
-                //触发回调
-                this.$emit('change',{'el':this.$el,'changeDate':dateStr,'changeDom':thisPath});
+              };
+              var newDates = Array.from(datesSet);
+              
+              //设置源数据
+              this.$emit('input',newDates);
 
-                this.$el.style.display = 'none';
-                //this.value = dateStr;
-              }
-              break;
+              //触发回调
+              this.$emit('change',{'el':this.$el,'changeDate':dateStr,'changeDom':thisPath});
+            }else{
+              //范围多选
+              this.selectMulti(dateStr,thisPath);
             }
+            
+
+
+
+          }else{
+            this.removeClass(this.$el.querySelectorAll('.day_list'),'active');
+            this.addClass(thisPath,'active');
+            this.$emit('input',dateStr);
+            //触发回调
+            this.$emit('change',{'el':this.$el,'changeDate':dateStr,'changeDom':thisPath});
+
+            this.$el.style.display = 'none';
+            //this.value = dateStr;
           }
         }
         
@@ -429,15 +432,10 @@
         return false;
       },
       getParent(event,className){
-        var path = event.path;
-        for(var i=0;i<path.length;i++){
-          var thisPath = path[i];
-          var thisClassName = thisPath.className,
-            tagName = thisPath.tagName;
-          // 找到日期选择的最外层day_list
-          if(tagName && (new RegExp(className)).test(thisClassName)){
-            return thisPath;
-          }
+        var thisPath = event.target.parentNode;
+        var thisClassName = thisPath.className;
+        if((new RegExp(className)).test(thisClassName)){
+          return thisPath;
         }
         return false;
       },
@@ -606,16 +604,12 @@
           //var $calendar = self.$el;
           var $this = e.target;
           //点击其他区域
-          var path = e.path;
           var isCalendar = false;
 
-          for(var i=0;i<path.length;i++){
-            var thisPath = path[i];
-            var pathClassName = thisPath.className;
-            if(/calendar_all/.test(pathClassName)){
-              isCalendar = true;
-              break;
-            }
+          var thisPath = e.target.parentNode;
+          var pathClassName = thisPath.className;
+          if(/calendar_all/.test(pathClassName)){
+            isCalendar = true;
           }
 
           //点击其他区域、日历区域隐藏日历
