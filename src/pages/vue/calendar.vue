@@ -14,7 +14,7 @@
       <h3>组件介绍</h3>
       
       <script class="preCode" type="text/plain" maxHeight="300" brush="html">
-        <calendar v-model="changeDate" bindDom="js_time" type="multi2" size="big" showDouble="2" maxMonths="6" @change="selectDate" :loading="isLoading"></calendar>
+        <calendar v-model="changeDate" bindDom="js_time" type="multi2" size="big" showDouble="true" maxMonths="6" @change="selectDate" :loading="isLoading"></calendar>
       </script>
 
       <script class="preCode" type="text/plain" brush="js">
@@ -51,7 +51,7 @@ export default {
       <p><span class="red2">bindDom</span>：绑定的输入框的className，含有这个class的输入框focus的时候就会唤起日历。</p>
       <p><span class="red2">type</span>：日期选择的方式，默认为单选。<span class="code2">multi1</span>为多选（点击选择），<span class="code2">multi2</span>为多选（范围选择）。</p>
       <p><span class="red2">size</span>：日历的尺寸，可设置为<span class="code2">mini</span>和<span class="code2">big</span>，默认为<span class="code2">mini</span>。</p>
-      <p><span class="red2">showDouble</span>：是否为双日历。</p>
+      <p><span class="red2">showDouble</span>：是否为双日历。默认为false。</p>
       <p><span class="red2">maxMonths</span>：限制日历的最大显示月数。默认不限制。</p>
       <p><span class="red2">loading</span>：是否显示loading状态。</p>
       
