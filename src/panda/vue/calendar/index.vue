@@ -241,10 +241,11 @@
       },
       //选中日期
       selectDate(e){
-        
-        var thisPath = e.target.parentNode,
+        var thisPath = this.getParents(e.target,'day_list'),
           className = thisPath.className;
         var dateStr = thisPath.getAttribute('date');
+
+        
         if(/day_list/.test(className) && dateStr && !/cal_disabled/.test(className)){
           
           //记录选种值
@@ -332,7 +333,7 @@
         //绑定鼠标移动事件
         document.onmouseover = function(e){
           //鼠标移动到
-          var dayList = self.getParent(e,'has_date');
+          var dayList = self.getParents(e.target,'has_date');
           if(dayList){
             var mouseDate = dayList.getAttribute('date');
             //往前移动，往后移动
@@ -431,12 +432,20 @@
         }
         return false;
       },
-      getParent(event,className){
-        var thisPath = event.target.parentNode;
-        var thisClassName = thisPath.className;
-        if((new RegExp(className)).test(thisClassName)){
-          return thisPath;
+      getParents(target,className){
+        //获取所有父元素
+        var parent = target;
+        var allParent = [];
+        while (parent.tagName != 'BODY') { 
+          allParent.push(parent);
+          parent = parent.parentNode;
         }
+        //遍历所有父元素
+        for(var i=0;i<allParent.length;i++){
+          if(this.hasClass(allParent[i],className)){
+            return allParent[i];
+          }
+        };
         return false;
       },
       getDateArr(startStr,endStr){
@@ -606,9 +615,8 @@
           //点击其他区域
           var isCalendar = false;
 
-          var thisPath = e.target.parentNode;
-          var pathClassName = thisPath.className;
-          if(/calendar_all/.test(pathClassName)){
+          var thisPath = self.getParents($this,'day_list');
+          if(thisPath && /calendar_all/.test(thisPath.className)){
             isCalendar = true;
           }
 
