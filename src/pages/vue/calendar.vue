@@ -83,7 +83,7 @@ export default {
 
       <h3>Demo3<span>小日历多选（单击选取）</span></h3>
       <p class="mb10">当前选中日期：<input class="input js_time2" v-model="changeDate4" type="text"></p>
-      <calendar bindDom="js_time2" type="multi" size="mini" maxMonths="6" v-model="changeDate4" @change="selectDate"></calendar>
+      <calendar bindDom="js_time2" type="multi1" size="mini" maxMonths="6" v-model="changeDate4" @change="selectDate"></calendar>
 
       <h3>Demo4<span>小日历多选（范围选取）</span></h3>
       <p class="mb10">当前选中日期：<input class="input js_time3" v-model="changeDate5" type="text"></p>
